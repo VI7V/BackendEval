@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentData</title>
+</head>
+
+<body>
+    <h1>STUDENT DATA</h1>
+    <script>
+        document.getElementsByTagName("h1")[0].innerHTML = "DATA ENTRY";
+        fetch("http://localhost:3000")
+            .then((responce) => { return responce.json() })
+            .then((data) => {
+                console.log(data);
+
+                const table = document.createElement('table');
+                const tableBody = document.createElement('tbody');
+
+                data.forEach(person => {
+                    const row = document.createElement('tr');
+                    const nameCell = document.createElement('td');
+                    const emailCell = document.createElement('td');
+                    const dobCell = document.createElement('td');
+                    const genderCell = document.createElement('td');
+                    const jobCell = document.createElement('td');
+                    const passwordCell = document.createElement('td');  
+
+
+                    nameCell.textContent = person.name;
+                    emailCell.textContent = person.email;
+                    dobCell.textContent = person.dob;
+                    genderCell.textContent = person.gender;
+                    jobCell.textContent = person.job;
+                    passwordCell.textContent = person.password;
+                    
+
+                    row.appendChild(nameCell);
+                    row.appendChild(emailCell);
+                    row.appendChild(dobCell);
+                    row.appendChild(genderCell);
+                    row.appendChild(jobCell);
+                    row.appendChild(passwordCell);
+
+                    tableBody.appendChild(row);
+                });
+
+                table.appendChild(tableBody);
+                document.body.appendChild(table);
+            })
+    </script>
+</body>
+
+</html>
